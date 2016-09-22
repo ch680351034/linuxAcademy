@@ -1,0 +1,5 @@
+#!/bin/bash
+
+# cambia los permisos a archivos para ejecutar bash
+
+chmod u+x $1
