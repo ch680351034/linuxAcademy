@@ -1,0 +1,9 @@
+#!/bin/bash
+
+# crea el archivo bash y cambia los permisos a archivos para ejecutar bash
+
+ARCHIVO=$1
+
+touch $ARCHIVO
+cp shablon $ARCHIVO
+chmod u+x $ARCHIVO
