@@ -1,0 +1,9 @@
+--- #
+- hosts: all
+  remote_user: user
+  become: yes
+  connection: ssh
+  gather_facts: yes
+  tasks:
+    - name: Copy file from remote server
+      fetch: src=/home/user/kislotishka.log dest=/home/user/prefix-{{ ansible_hostname }} flat=yes

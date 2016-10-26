@@ -1,0 +1,9 @@
+--- # Install wsgi
+- hosts: web
+  remote_user: user
+  become: yes
+  connection: ssh
+  gather_facts: no
+  tasks:
+    - name: Install wsgi module for apache
+      apt: name=libapache2-mod-wsgi state=present

@@ -1,0 +1,13 @@
+--- #  Create users remotely
+- hosts: all
+  remote_user: user
+  become: yes
+  connection: ssh
+  gather_facts: yes
+  tasks:
+    - name: Create user on CentOS
+      user: name=harpo comment="Marx brother" group=wheel
+      when: ansible_os_family=="RedHat"
+    - name: Create user on Ubuntu
+      user: name=groucho comment="Elder brother" group=sudo
+      when: ansible_os_family=="Debian"

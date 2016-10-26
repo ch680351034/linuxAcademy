@@ -1,0 +1,14 @@
+--- #
+- hosts: all
+  remote_user: user
+  become: yes
+  connection: ssh
+  gather_facts: no
+  vars_prompt:
+    - name: mensaje
+      prompt: Ingresa mensaje
+      default: trata de colaborar más
+      private: no
+  tasks:
+    - name: Ejecutar comando ingresado (default 'ls')
+      raw: echo {{mensaje}} >> coco.txt

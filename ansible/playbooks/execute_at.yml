@@ -1,0 +1,11 @@
+--- # Schedule with AT
+- hosts: all
+  remote_user: user
+  become: yes
+  connection: ssh
+  gather_facts: no
+  tasks:
+    - name: Schedule writing into a file
+      at: command="ls -laF > /home/user/zapatero.txt" count=1 units="minutes" 
+    - name: Delete file
+      at: command="rm /home/user/zapatero.txt" count=2 units="minutes"

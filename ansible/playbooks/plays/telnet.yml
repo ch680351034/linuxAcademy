@@ -1,0 +1,2 @@
+- name: Instalar paquete Debian
+  apt: name=telnet state=present

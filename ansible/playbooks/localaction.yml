@@ -1,0 +1,7 @@
+--- # local action
+- hosts: 127.0.0.1
+  remote_user: user
+  connection: local
+  tasks:
+    - name: Install Telnet
+      apt: name=telnet state=present

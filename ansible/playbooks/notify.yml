@@ -1,0 +1,13 @@
+--- # Notify example
+- hosts: web
+  remote_user: user
+  become: yes
+  connection: ssh
+  gather_facts: no
+  tasks:
+    - name: Install telnet 
+      apt: name="telnet" state="present"
+      notify: ya lo instale
+  handlers:
+    - name: ya lo instale
+      debug: msg="Tarea completada..."

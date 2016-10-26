@@ -1,0 +1,14 @@
+--- #
+- hosts: all
+  remote_user: user
+  become: yes
+  connection: ssh
+  gather_facts: no
+  vars:
+    nombre: Luisa
+    apellido: Newball
+    nivel: 9
+    mensaje: Study and be prepared
+  tasks:
+    - name: Enviar plantilla jinja
+      template: src=/home/user/plantillas/primera.j2 dest=/home/user/mijinja2

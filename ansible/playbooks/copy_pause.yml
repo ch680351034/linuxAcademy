@@ -1,0 +1,16 @@
+--- # copy and pause example
+- hosts: centos
+  remote_user: user
+  become: yes
+  connection: ssh
+  gather_facts: no
+  tasks:
+    - name: copy file
+      copy: src=/home/user/kislorod dest=/home/user mode=0744 owner=user
+    - name: Pausing
+      pause:
+        prompt: "Esta es una pequeña pausa"
+    - name: Ejecutar script en remoto
+      command: /home/user/kislorod
+    - name: Update system
+      yum: name=* update_cache=yes state=latest

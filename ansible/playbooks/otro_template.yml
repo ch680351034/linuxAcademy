@@ -1,0 +1,11 @@
+--- #
+- hosts: centos
+  remote_user: user
+  become: yes
+  connection: ssh
+  gather_facts: yes
+  vars_files:
+    - /home/user/variables/vars.yml
+  tasks:
+    - name: copy template
+      template: src=/home/user/plantillas/papaya.j2 dest=/home/user/papaya.txt 

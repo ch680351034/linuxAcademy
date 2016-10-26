@@ -1,0 +1,8 @@
+--- # Importing yml
+- hosts: web
+  remote_user: user
+  become: yes
+  connection: ssh
+  gather_facts: no
+  tasks:
+  - include: plays/escripto.yml

@@ -1,0 +1,10 @@
+--- # The include statement
+- hosts: web
+  remote_user: user
+  become: yes
+  connection: ssh
+  gather_facts: no
+  vars:
+    paquete: telnet
+  tasks:
+  - include: plays/telnet.yml

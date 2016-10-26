@@ -1,0 +1,9 @@
+- hosts: web
+  remote_user: user
+  become: yes
+  vars:
+    my_prog: telnet
+  tasks:
+  - name: Instalar mi programa
+    apt: name={{my_prog}} state=latest
+    

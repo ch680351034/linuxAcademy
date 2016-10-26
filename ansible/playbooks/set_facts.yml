@@ -1,0 +1,22 @@
+--- # Set facts example
+- hosts: all
+  remote_user: user
+  become: yes
+  connection: ssh
+  gather_facts: no
+  vars:
+    valor: 23
+  tasks:
+    - name: get values
+      shell: ls 
+      register: coco
+    - set_fact: myvalue={{coco.stdout}}
+    - name: set first fact
+      set_fact: 
+        primer_hecho: bebida
+        segundo_hecho: whiskey
+        tercer_hecho: '{{valor}}'
+    - debug: msg={{ primer_hecho }}
+    - debug: msg={{ myvalue }}
+
+      

@@ -1,0 +1,18 @@
+--- # Using templates
+- hosts: all
+  remote_user: user
+  become: yes
+  connection: ssh
+  gather_facts: no
+  vars:
+    target: Russia
+    action: hack them servers
+    date: 2016-10-15
+  tasks:
+    - name: Redireccionar salida de lsmod
+      local_action: shell lsmod >> lsmod.log
+      become: no
+      #remote_user: user
+      ignore_errors: yes
+    - name: Enviar mensaje de hacking
+      template: src=/home/user/plantillas/russia.j2 dest=/home/user/russia.txt

@@ -1,0 +1,15 @@
+--- #
+- hosts: centos
+  remote_user: user
+  become: yes
+  connection: ssh
+  gather_facts: no
+  vars_files:
+    - password_mysql.yml
+  tasks:
+    - name: Install Python dependency
+      yum: pkg=MySQL-python state=latest
+    - name: Create new database
+      mysql_db: name=MisDatosDB state=present login_user={{ user }} login_password={{ password }}
+    - name: Create a backup database
+      mysql_db: name=dbTest state=dump target=/var/lib/mydbBkup.sql login_user={{ user }} login_password={{ password }}

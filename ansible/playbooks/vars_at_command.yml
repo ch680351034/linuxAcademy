@@ -1,0 +1,18 @@
+--- # --start-at-task example
+- hosts: '{{host}}'
+  remote_user: user
+  become: yes
+  connection: ssh
+  gather_facts: no
+  vars:
+    pais1: Russia
+    pais2: China
+    pais3: USA
+    accion: '{{ejecutar}}'
+  tasks:
+    - name: copy first file
+      template: src=/home/user/plantillas/startat1.j2 dest=/home/user/startat1.txt
+    - name: copy second file
+      template: src=/home/user/plantillas/startat2.j2 dest=/home/user/startat2.txt
+    - name: copy third file
+      template: src=/home/user/plantillas/startat3.j2 dest=/home/user/startat3.txt

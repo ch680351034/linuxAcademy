@@ -1,0 +1,13 @@
+--- # Filesystem create
+- hosts: web
+  remote_user: user
+  become: yes
+  connection: ssh
+  gather_facts: no
+  tasks:
+    - name: Montando device
+      mount:
+        name: /home/user/montando
+        src: /dev/xvdf1
+        fstype: ext2
+        state: present

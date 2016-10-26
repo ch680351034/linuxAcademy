@@ -1,0 +1,9 @@
+--- # Script module
+- hosts: web
+  remote_user: user
+  become: yes
+  connection: ssh
+  gather_facts: no
+  tasks:
+    - name: send a script to remote
+      script: /home/user/scripts/myscripto.sh

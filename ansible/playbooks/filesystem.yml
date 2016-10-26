@@ -1,0 +1,9 @@
+--- # Filesystem create
+- hosts: web
+  remote_user: user
+  become: yes
+  connection: ssh
+  gather_facts: no
+  tasks:
+    - name: Format remote data partition
+      filesystem: fstype=ext2 dev=/dev/xvdf1 opts="-cc"

@@ -1,0 +1,12 @@
+--- #
+- hosts: all
+  remote_user: user
+  become: yes
+  connection: ssh
+  gather_facts: no
+  tasks:
+    - name: Run top and log it
+      raw: /bin/ls -alt /home/user/ >> /home/user/listar.log
+    - name: Run 'ps aux' and log it
+      raw: /bin/ps aux >> psaux.log
+      run_once: true

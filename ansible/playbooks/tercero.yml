@@ -1,0 +1,21 @@
+--- # loops
+- hosts: web
+  remote_user: user
+  become: yes
+  connection: ssh
+  vars:
+    personajes:
+      tomp:
+        name: Tom Paine
+      gut:
+        name: Frank Gutty
+  tasks:
+    - name: Imprimir datos
+      debug: msg="This {{item.key}} is {{item.value.name}}"
+      with_dict: "{{personajes}}"
+        #zarpo:
+        #  name: Zarp Heist
+        #hekko:
+        #  name: Henk Takle
+        #zonto:
+        #  name: Zac Efron

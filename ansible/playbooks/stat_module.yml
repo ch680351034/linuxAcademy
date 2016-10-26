@@ -1,0 +1,13 @@
+--- # Stat module
+- hosts: web
+  remote_user: user
+  become: yes
+  connection: ssh
+  gather_facts: no
+  tasks:
+    - name: Check if file/folder exists
+      stat: path=/home/user/stat_dir
+      register: mypath
+    - debug: msg="It is a directory"
+      when: mypath.stat.isdir is defined and mypath.stat.isdir
+    - debug: msg="{{ mypath.stat.inode }}"

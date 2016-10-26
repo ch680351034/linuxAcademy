@@ -1,0 +1,11 @@
+--- # Lookup example
+- hosts: web
+  remote_user: user
+  become: yes
+  gather_facts: no
+  vars:
+    contents: "{{ lookup('file', 'texto') }}"
+  tasks:
+    - name: aplicar debug a ver que pasa
+      #debug: msg="Contenido del archivo {{contents}}"
+      debug: msg="El nivel de Luisa es {{ lookup('csvfile', 'Luisa file=mylookup.csv delimiter=, col=1') }}"

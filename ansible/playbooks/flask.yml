@@ -1,0 +1,25 @@
+--- # Install wsgi
+- hosts: web
+  remote_user: user
+  become: yes
+  connection: ssh
+  gather_facts: yes
+  tasks:
+    - name: Install python-pip
+      apt: name=python-pip state=present
+    - name: Copy script_venv.py to remote
+      copy: src=/home/user/myflask/script_venv.sh dest=/home/user mode=0744 owner=user group=user
+    - name: Execute previous script virtualenv installation
+      command: /home/user/script_venv.sh
+    - name: Make sure virtualenv is installed
+      shell: /usr/bin/which virtualenv
+      register: result
+    - debug: var=result verbosity=2
+    - name: Install flask using venv
+      pip: name=flask virtualenv=/var/www/html/venv
+    - name: Copy app.py
+      copy: src=/home/user/myflask/app.py dest=/var/www/html/ mode=0744 owner=user group=user
+    - name: Copy script activate venv
+      copy: src=/home/user/myflask/activate_venv.sh dest=/var/www/html/ mode=0744
+    - name: Execute script
+      command: /var/www/html/activate_venv.sh 

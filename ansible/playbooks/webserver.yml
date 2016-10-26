@@ -1,0 +1,28 @@
+--- # My outline
+- hosts: web
+  remote_user: user
+  become: yes
+  connection: ssh
+  tasks:
+    - name: Comenzar el registro de tiempo
+      command: /bin/date
+      register: comienzo_tiempo
+    - debug: var=comienzo_tiempo
+    - name: Instalar paquetes lynx, telnet
+      apt: name={{item}} state=present
+      with_items:
+        - telnet
+        - lynx
+    - name: Verificar si está lynx
+      register: lynx_presente
+      command: lynx -version
+      ignore_errors: true
+    - name: Si lynx está
+      debug: var=lynx_presente
+      when: lynx_presente | success
+    - name: Registrar paquetes instalados
+      raw: apt list --installed >> /home/user/instalados.txt
+    - name: Fin de registro de tiempo
+      command: /bin/date
+      register: fin_tiempo
+    - debug: var=fin_tiempo 

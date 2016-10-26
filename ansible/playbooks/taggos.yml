@@ -1,0 +1,25 @@
+--- # Tags example
+- hosts: all
+  remote_user: user
+  become: yes
+  connection: ssh
+  #gather_facts: no
+  tasks:
+    - name: Vacilarla con crudo, o sea, raw
+      raw: ls /home/user >> /home/user/taggo1.txt
+      tags:
+        - paquetacouno
+    - name: Otro vacile diferente
+      raw: ls /home >> /home/user/taggo2.txt
+      tags:
+        - paquetacodos
+    - name: Ejecutar script
+      action: shell /home/user/escripto.sh
+      register: result
+      until: result.stdout.find("Finalizado") != -1
+      retries: 5
+      delay: 3
+      tags:
+        - hasta
+      when: ansible_distribution == "CentOS"
+    - debug: var=result

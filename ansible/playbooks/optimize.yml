@@ -1,0 +1,36 @@
+--- # Optimized playbook
+- hosts: all
+  remote_user: user
+  become: yes
+  connection: ssh
+  gather_facts: yes
+  tasks:
+    - name: Registro inicial de tiempo
+      command: /usr/bin/date
+      register: tiempo_inicial
+      ignore_errors: yes
+    - debug: var=tiempo_inicial
+    - name: Install Apache on CentOS
+      yum: pkg=httpd state=latest
+      when: ansible_os_family == "RedHat"
+      notify: start httpd
+    - name: Verify apache is running on CentOS
+      command: systemctl status httpd
+      when: ansible_os_family == "RedHat"
+    - name: Install apache on Debian
+      apt: name=apache2 state=latest
+      when: ansible_os_family == "Debian"
+      notify: start apache2
+    - name: Verify apache is running on Debian
+      command: service apache2 status
+      when: ansible_os_family == "Debian"
+    - name: Fin de registro de tiempo
+      command: /usr/bin/date
+      ignore_errors: yes
+      register: tiempo_final
+    - debug: var=tiempo_final
+  handlers:
+    - name: start httpd
+      service: name=httpd state=restarted
+    - name: start apache2
+      service: name=apache2 state=restarted

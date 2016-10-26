@@ -1,0 +1,12 @@
+--- # Conditional example
+- hosts: all
+  remote_user: user
+  become: yes
+  connection: ssh
+  tasks:
+    - name: Instalar lynx en Ubuntu
+      apt: name=lynx state=present
+      when: ansible_os_family == "Debian"
+    - name: Instalar lynx en centos
+      yum: name=lynx state=present
+      when: ansible_os_family == "RedHat"

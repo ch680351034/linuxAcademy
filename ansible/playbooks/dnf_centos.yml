@@ -1,0 +1,9 @@
+--- #
+- hosts: centos
+  remote_user: user
+  become: yes
+  connection: ssh
+  gather_facts: no
+  tasks:
+    - name: Install lynx
+      dnf: name=lynx state=present
